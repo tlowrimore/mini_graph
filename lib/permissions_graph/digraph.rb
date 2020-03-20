@@ -1,6 +1,6 @@
 require 'forwardable'
 require 'permissions_graph/error'
-require 'permissions_graph/edge'
+require 'permissions_graph/directed_edge'
 
 module PermissionsGraph
   class Digraph
@@ -103,7 +103,7 @@ module PermissionsGraph
       when 1
         args.first
       when 2
-        PermissionsGraph::Edge.new(*args)
+        PermissionsGraph::DirectedEdge.new(*args)
       else
         raise ArgumentError,
               "wrong number of arguments.  #{args.length} args were provided. 1 or 2 arguments were expected."

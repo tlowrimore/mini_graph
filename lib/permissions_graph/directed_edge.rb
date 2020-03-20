@@ -1,7 +1,7 @@
 require 'permissions_graph/error'
 
 module PermissionsGraph
-  class Edge
+  class DirectedEdge
     attr_reader :origin, :destination
 
     def initialize(origin, destination)
@@ -21,10 +21,13 @@ module PermissionsGraph
 
     alias inspect to_s
 
+    # Reverses the direction of the edge
     def reverse
       self.class.new(destination, origin)
     end
 
+    # Indicates a self-looping edge; i.e., an edge that connects a vertex to
+    # itself.
     def self_loop?
       origin == destination
     end

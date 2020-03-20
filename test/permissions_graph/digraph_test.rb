@@ -63,7 +63,7 @@ class PermissionsGraph::DigraphTest < Minitest::Test
 
   test '#add_edge allows instances of PermissionsGraph::Edge to be added' do
     graph = create_graph 1,2,3,4,5
-    edge  = PermissionsGraph::Edge.new(2,3)
+    edge  = PermissionsGraph::DirectedEdge.new(2,3)
     graph.add_edge(edge)
 
     assert_equal "(2 -> 3)", graph.to_s
@@ -85,7 +85,7 @@ class PermissionsGraph::DigraphTest < Minitest::Test
 
   test '#connected? returns true when provided an edge for two connected vertices' do
     graph = create_graph 1,2,3,4,5
-    edge  = PermissionsGraph::Edge.new(0,4)
+    edge  = PermissionsGraph::DirectedEdge.new(0,4)
 
     graph.add_edge(0,4)
 
@@ -94,7 +94,7 @@ class PermissionsGraph::DigraphTest < Minitest::Test
 
   test '#connected? returns false when provided an edge for two disconnected vertices' do
     graph = create_graph 1,2,3,4,5
-    edge  = PermissionsGraph::Edge.new(2,3)
+    edge  = PermissionsGraph::DirectedEdge.new(2,3)
 
     graph.add_edge(0,4)
 
