@@ -96,6 +96,8 @@ module PermissionsGraph
     # Private
     # -----------------------------------------------------
 
+    private
+
     def args_to_edge(args)
       case args.length
       when 1
