@@ -1,5 +1,5 @@
 require "permissions_graph/version"
-require "permissions_graph/digraph"
+require "permissions_graph/graph"
 
 module PermissionsGraph
 

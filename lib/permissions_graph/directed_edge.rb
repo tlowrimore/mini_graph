@@ -13,13 +13,20 @@ module PermissionsGraph
       origin == edge.origin && destination == edge.destination
     end
 
-    alias == eql?
+    # cannot use alias or alias_method for this, as subclasses (e.g. UndirectedEdge)
+    # do not behave as expected.  We'll be explicit.
+    def ==(edge)
+      eql?(edge)
+    end
 
     def to_s
       "(#{origin} -> #{destination})"
     end
 
-    alias inspect to_s
+    # Another case of not using alias to allow subclasses to behave as expected.
+    def inspect
+      to_s
+    end
 
     # Reverses the direction of the edge
     def reverse

@@ -5,5 +5,6 @@ module PermissionsGraph
     class SelfLoopError < GraphError; end
     class ParallelEdgeError < GraphError; end
     class InvalidIndexError < GraphError; end
+    class InvalidEdgeType < GraphError; end
   end
 end

@@ -1,22 +1,29 @@
 require 'forwardable'
 require 'permissions_graph/error'
 require 'permissions_graph/directed_edge'
+require 'permissions_graph/undirected_edge'
 
 module PermissionsGraph
-  class Digraph
+  class Graph
 
     include Enumerable
     extend  Forwardable
 
     def_delegators :@vertices, :each, :size, :[]
 
-    # Initialize the graph with a list of vertices
-    def initialize(*vertices)
-      # copy the vertices to an array to avoid side-effects of mutations made to
-      # the original set of vertices
-
+    # Initialize a directed or undirected graph with a list of vertices
+    def initialize(vertices, directed: false)
+      @directed = !!directed
       @vertices = [*vertices].flatten
       @edges    = []
+    end
+
+    def edge_class
+      if directed?
+        PermissionsGraph::DirectedEdge
+      else
+        PermissionsGraph::UndirectedEdge
+      end
     end
 
     # Adds an edge from the vertex at origin_index to the vertex at
@@ -36,18 +43,6 @@ module PermissionsGraph
               'destination_index invalid'
       end
 
-      # We do not allow self loops
-      if edge.self_loop?
-        raise ::PermissionsGraph::Error::SelfLoopError,
-              'Cannot create a self-looping edge'
-      end
-
-      # We do not allow parallel edges
-      if connected?(edge)
-        raise ::PermissionsGraph::Error::ParallelEdgeError,
-              'Edge already exists'
-      end
-
       edges << edge
     end
 
@@ -58,18 +53,27 @@ module PermissionsGraph
       edges.include? edge
     end
 
+    def directed?
+      @directed
+    end
+
+    def undirected?
+      !directed?
+    end
+
     # Returns an array of vertex indices that have an inbound edge from the vertex
     # at the supplied index
     def adjacent_vertices(index)
       edges.reduce([]) do |adj, edge|
         adj << edge.destination if edge.origin == index
+        adj << edge.origin      if undirected? && edge.destination == index
         adj
       end
     end
 
     # Returns a reversed copy of the digraph.
     def reverse
-      self.class.new(@vertices).tap do |dg|
+      self.class.new(@vertices, directed: @directed).tap do |dg|
         dg.edges = edges.map(&:reverse)
       end
     end
@@ -101,9 +105,14 @@ module PermissionsGraph
     def args_to_edge(args)
       case args.length
       when 1
-        args.first
+        args.first.tap do |edge|
+          if edge.class != edge_class
+            raise PermissionsGraph::Error::InvalidEdgeType,
+                  "edge must be instance of #{edge_class.name}"
+          end
+        end
       when 2
-        PermissionsGraph::DirectedEdge.new(*args)
+        edge_class.new(*args)
       else
         raise ArgumentError,
               "wrong number of arguments.  #{args.length} args were provided. 1 or 2 arguments were expected."
