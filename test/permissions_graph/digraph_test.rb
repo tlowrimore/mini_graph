@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PermissionsGraph::DigraphTest < Minitest::Test
+  parallelize_me!
 
   def create_graph(*vertices)
     PermissionsGraph::Digraph.new(*vertices)

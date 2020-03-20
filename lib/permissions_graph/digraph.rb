@@ -69,7 +69,7 @@ module PermissionsGraph
 
     # Returns a reversed copy of the digraph.
     def reverse
-      Digraph.new(@vertices).tap do |dg|
+      self.class.new(@vertices).tap do |dg|
         dg.edges = edges.map(&:reverse)
       end
     end
