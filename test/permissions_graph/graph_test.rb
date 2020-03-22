@@ -76,46 +76,6 @@ class PermissionsGraph::GraphTest < Minitest::Test
     end
   end
 
-  test '#connected? returns true when provided an origin and destination index for two connected vertices' do
-    graph = create_directed_graph [1,2,3,4,5]
-    graph.add_edge(2,3)
-
-    assert graph.connected?(2,3)
-  end
-
-  test '#connected? returns false when provided an origin and destination index for two disconnected vertices' do
-    graph = create_directed_graph [1,2,3,4,5]
-    graph.add_edge(0,4)
-
-    refute graph.connected?(2,3)
-  end
-
-  test '#connected? returns true when provided an edge for two connected vertices' do
-    graph = create_directed_graph [1,2,3,4,5]
-    edge  = PermissionsGraph::DirectedEdge.new(0,4)
-
-    graph.add_edge(0,4)
-
-    assert graph.connected?(edge)
-  end
-
-  test '#connected? returns false when provided an edge for two disconnected vertices' do
-    graph = create_directed_graph [1,2,3,4,5]
-    edge  = PermissionsGraph::DirectedEdge.new(2,3)
-
-    graph.add_edge(0,4)
-
-    refute graph.connected?(edge)
-  end
-
-  test '#connected? raises an error when provided invalid args' do
-    graph = create_directed_graph [1,2,3,4,5]
-
-    assert_raises ArgumentError do
-      graph.add_edge(0,2,4)
-    end
-  end
-
   test '#adjacent_vertices returns an empty array when a vertex has no outbound connections to other vertices on a directed graph' do
     graph = create_directed_graph [1,2,3,4,5]
 

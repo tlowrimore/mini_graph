@@ -46,13 +46,6 @@ module PermissionsGraph
       edges << edge
     end
 
-    # Indicates whether the vertex at origin_index is connected to the vertex
-    # at destination_index
-    def connected?(*args)
-      edge = args_to_edge(args)
-      edges.include? edge
-    end
-
     def directed?
       @directed
     end
@@ -69,6 +62,7 @@ module PermissionsGraph
         adj << edge.origin      if undirected? && edge.destination == index
         adj
       end
+      .uniq
     end
 
     # Returns a reversed copy of the digraph.
