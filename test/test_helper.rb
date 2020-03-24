@@ -2,6 +2,9 @@ $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 
 require "permissions_graph"
 require "minitest/autorun"
+require "minitest/pride"
+
+Minitest::PrideIO.pride!
 
 # Macro for making test definitions easier to type and read.
 def test(description, &block)
