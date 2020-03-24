@@ -1,7 +1,6 @@
 require 'forwardable'
+require 'permissions_graph/edge'
 require 'permissions_graph/error'
-require 'permissions_graph/directed_edge'
-require 'permissions_graph/undirected_edge'
 
 module PermissionsGraph
   class Graph
@@ -20,9 +19,9 @@ module PermissionsGraph
 
     def edge_class
       if directed?
-        PermissionsGraph::DirectedEdge
+        PermissionsGraph::Edge::Directed
       else
-        PermissionsGraph::UndirectedEdge
+        PermissionsGraph::Edge::Undirected
       end
     end
 

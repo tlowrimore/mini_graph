@@ -52,7 +52,7 @@ class PermissionsGraph::GraphTest < Minitest::Test
 
   test '#add_edge allows instances of PermissionsGraph::Edge to be added' do
     graph = create_directed_graph [1,2,3,4,5]
-    edge  = PermissionsGraph::DirectedEdge.new(2,3)
+    edge  = PermissionsGraph::Edge::Directed.new(2,3)
     graph.add_edge(edge)
 
     assert_equal "(2 -> 3)", graph.to_s
@@ -60,7 +60,7 @@ class PermissionsGraph::GraphTest < Minitest::Test
 
   test '#add_edge raises an error if an undirected edge is added to a directed graph' do
     graph = create_directed_graph [1,2,3,4]
-    edge  = PermissionsGraph::UndirectedEdge.new(2,3)
+    edge  = PermissionsGraph::Edge::Undirected.new(2,3)
 
     assert_raises PermissionsGraph::Error::InvalidEdgeType do
       graph.add_edge(edge)
@@ -69,7 +69,7 @@ class PermissionsGraph::GraphTest < Minitest::Test
 
   test '#add_edge raises an error if a directed edge is added to an undirected graph' do
     graph = create_undirected_graph [1,2,3,4]
-    edge  = PermissionsGraph::DirectedEdge.new(2,3)
+    edge  = PermissionsGraph::Edge::Directed.new(2,3)
 
     assert_raises PermissionsGraph::Error::InvalidEdgeType do
       graph.add_edge(edge)
