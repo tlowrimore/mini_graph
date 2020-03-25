@@ -14,7 +14,7 @@ module SimpleGraph
       # Initialize a directed or undirected graph with a list of vertices
       def initialize(vertices, directed: false)
         @directed = !!directed
-        @vertices = [*vertices].flatten
+        @vertices = [vertices].flatten
         @edges    = []
       end
 
