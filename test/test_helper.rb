@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 
-require "permissions_graph"
+require "simple_graph"
 require "minitest/autorun"
 require "minitest/pride"
 

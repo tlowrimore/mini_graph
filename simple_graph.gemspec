@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "permissions_graph/version"
+require "simple_graph/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "permissions_graph"
-  spec.version       = PermissionsGraph::VERSION
+  spec.name          = "simple_graph"
+  spec.version       = SimpleGraph::VERSION
   spec.authors       = ["tlowrimore"]
   spec.email         = ["tlowrimore@coroutine.com"]
 
-  spec.summary       = %q{A graph representation of permissions}
-  spec.description   = %q{Allows definition of permissions as a graph}
-  spec.homepage      = "https://github.com/coroutine/permissions_graph"
+  spec.summary       = %q{A simple graph library + DSL}
+  spec.description   = %q{A simple graph library + DSL}
+  spec.homepage      = "https://github.com/coroutine/simple_graph"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.

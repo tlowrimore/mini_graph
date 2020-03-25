@@ -2,5 +2,5 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# Specify your gem's dependencies in permissions_graph.gemspec
+# Specify your gem's dependencies in simple_graph.gemspec
 gemspec
