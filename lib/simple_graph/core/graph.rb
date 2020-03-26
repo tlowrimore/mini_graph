@@ -101,7 +101,7 @@ module SimpleGraph
         when 1
           args.first.tap do |edge|
             if edge.class != edge_class
-              raise SimpleGraph::Core::Error::InvalidEdgeType,
+              raise SimpleGraph::Core::Error::InvalidEdgeTypeError,
                     "edge must be instance of #{edge_class.name}"
             end
           end

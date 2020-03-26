@@ -1,3 +1,4 @@
+require 'simple_graph/core/edge'
 require 'simple_graph/core/graph'
 
 module SimpleGraph
@@ -7,7 +8,7 @@ module SimpleGraph
         unless block_given?
           raise ArgumentError, "cannot call .create without a block"
         end
-        
+
         graph_context = new(vertices)
         graph_context.instance_eval(&block)
         graph_context.resolve
@@ -18,6 +19,11 @@ module SimpleGraph
       # -----------------------------------------------------
 
       def resolve
+        if @edges.any? { |edge| edge.any?(&:nil?) }
+          raise SimpleGraph::Core::Error::InvalidEdgeError,
+                'One or more invalid edges were specified'
+        end
+
         SimpleGraph::Core::Graph.new(@vertices, directed: @directed).tap do |g|
           @edges.each do |edge|
             g.add_edge(*edge)

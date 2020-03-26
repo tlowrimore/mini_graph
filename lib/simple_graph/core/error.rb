@@ -6,7 +6,8 @@ module SimpleGraph
       class SelfLoopError < GraphError; end
       class ParallelEdgeError < GraphError; end
       class InvalidIndexError < GraphError; end
-      class InvalidEdgeType < GraphError; end
+      class InvalidEdgeError < GraphError; end
+      class InvalidEdgeTypeError < GraphError; end
     end
   end
 end

@@ -62,7 +62,7 @@ class SimpleGraph::Core::GraphTest < Minitest::Test
     graph = create_directed_graph [1,2,3,4]
     edge  = SimpleGraph::Core::Edge::Undirected.new(2,3)
 
-    assert_raises SimpleGraph::Core::Error::InvalidEdgeType do
+    assert_raises SimpleGraph::Core::Error::InvalidEdgeTypeError do
       graph.add_edge(edge)
     end
   end
@@ -71,7 +71,7 @@ class SimpleGraph::Core::GraphTest < Minitest::Test
     graph = create_undirected_graph [1,2,3,4]
     edge  = SimpleGraph::Core::Edge::Directed.new(2,3)
 
-    assert_raises SimpleGraph::Core::Error::InvalidEdgeType do
+    assert_raises SimpleGraph::Core::Error::InvalidEdgeTypeError do
       graph.add_edge(edge)
     end
   end
