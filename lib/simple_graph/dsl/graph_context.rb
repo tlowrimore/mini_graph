@@ -4,7 +4,7 @@ require 'simple_graph/core/graph'
 module SimpleGraph
   module DSL
     class GraphContext
-      def self.create(*vertices, &block)
+      def self.evaluate(*vertices, &block)
         unless block_given?
           raise ArgumentError, "cannot call .create without a block"
         end

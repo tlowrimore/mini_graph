@@ -1,5 +1,6 @@
 require "simple_graph/version"
 require "simple_graph/dsl/graph_context"
+require "simple_graph/dsl/search_context"
 
 module SimpleGraph
 
@@ -22,6 +23,14 @@ module SimpleGraph
   #   end
   #
   def self.create(*vertices, &block)
-    SimpleGraph::DSL::GraphContext.create(*vertices, &block)
+    SimpleGraph::DSL::GraphContext.evaluate(*vertices, &block)
+  end
+
+  def self.dfs(graph, start_at: nil)
+    SimpleGraph::DSL::SearchContext.evaluate(graph, start_at, algorithm: :dfs)
+  end
+
+  def self.bfs(graph, start_at: nil)
+    SimpleGraph::DSL::SearchContext.evaluate(graph, start_at, algorithm: :bfs)
   end
 end

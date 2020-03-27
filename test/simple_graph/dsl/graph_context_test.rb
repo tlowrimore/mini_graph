@@ -1,33 +1,35 @@
 require 'test_helper'
 
 class SimpleGraph::DSL::GraphContextTest < Minitest::Test
+  parallelize_me!
+
   def create_graph(*vertices, &block)
-    SimpleGraph::DSL::GraphContext.create(*vertices, &block)
+    SimpleGraph::DSL::GraphContext.evaluate(*vertices, &block)
   end
 
-  test '.create raises an error if no block is provided' do
+  test '.evaluate raises an error if no block is provided' do
     assert_raises ArgumentError do
       create_graph(1, 2, 3)
     end
   end
 
-  test '.create creates a new graph when vertices are separate arguments and a block is provided' do
+  test '.evaluate creates a new graph when vertices are separate arguments and a block is provided' do
     graph = create_graph('a', 'b', 'c') do
       edge from: 'a', to: 'b'
     end
 
-    assert_equal %w(a b c), graph.entries
+    assert_equal %w(a b c), graph.vertices
   end
 
-  test '.create creates a new graph when vertices are provided as a single argument and a block is provided' do
+  test '.evaluate creates a new graph when vertices are provided as a single argument and a block is provided' do
     graph = create_graph(%w(a b c)) do
       edge from: 'a', to: 'b'
     end
 
-    assert_equal %w(a b c), graph.entries
+    assert_equal %w(a b c), graph.vertices
   end
 
-  test '.create creates an undirected graph by default' do
+  test '.evaluate creates an undirected graph by default' do
     graph = create_graph(%w(a b c)) do
       edge from: 'a', to: 'b'
     end
@@ -35,7 +37,7 @@ class SimpleGraph::DSL::GraphContextTest < Minitest::Test
     assert graph.undirected?
   end
 
-  test '.create creates a directed graph when the directed! directive is used' do
+  test '.evaluate creates a directed graph when the directed! directive is used' do
     graph = create_graph(%w(a b c)) do
       directed!
       edge from: 'a', to: 'b'
@@ -44,7 +46,7 @@ class SimpleGraph::DSL::GraphContextTest < Minitest::Test
     assert graph.directed?
   end
 
-  test '.create raises an error when an invalid edge is specified' do
+  test '.evaluate raises an error when an invalid edge is specified' do
     assert_raises SimpleGraph::Core::Error::InvalidEdgeError do
       create_graph(%w(a b c)) do
         edge from: 'a', to: 'z'
@@ -52,7 +54,7 @@ class SimpleGraph::DSL::GraphContextTest < Minitest::Test
     end
   end
 
-  test '.create allows for one-to-one edges to be defined' do
+  test '.evaluate allows for one-to-one edges to be defined' do
     vertices      = %w(a b c)
     vertex_index  = vertices.map.with_index { |v, i| [v, i] }.to_h
 
@@ -66,7 +68,7 @@ class SimpleGraph::DSL::GraphContextTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  test '.create allows for one-to-many edges to be defined' do
+  test '.evaluate allows for one-to-many edges to be defined' do
     vertices      = %w(a b c)
     vertex_index  = vertices.map.with_index { |v, i| [v, i] }.to_h
 
@@ -80,7 +82,7 @@ class SimpleGraph::DSL::GraphContextTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  test '.create allows for many-to-many edges to be defined' do
+  test '.evaluate allows for many-to-many edges to be defined' do
     vertices      = %w(a b c)
     vertex_index  = vertices.map.with_index { |v, i| [v, i] }.to_h
 

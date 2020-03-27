@@ -11,10 +11,12 @@ module SimpleGraph
 
       def_delegators :@vertices, :each, :size, :[]
 
+      attr_reader :vertices
+
       # Initialize a directed or undirected graph with a list of vertices
       def initialize(vertices, directed: false)
         @directed = !!directed
-        @vertices = [vertices].flatten
+        @vertices = [vertices].flatten.freeze
         @edges    = []
       end
 
@@ -67,7 +69,7 @@ module SimpleGraph
 
       # Returns a reversed copy of the digraph.
       def reverse
-        self.class.new(@vertices, directed: @directed).tap do |dg|
+        self.class.new(vertices, directed: @directed).tap do |dg|
           dg.edges = edges.map(&:reverse)
         end
       end

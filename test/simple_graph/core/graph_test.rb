@@ -13,7 +13,19 @@ class SimpleGraph::Core::GraphTest < Minitest::Test
 
   test '#initialize with vertices when initialized with an array of vertices' do
     graph = create_directed_graph [1,2,3,4,5]
-    assert_equal [1,2,3,4,5], graph.entries
+    assert_equal [1,2,3,4,5], graph.vertices
+  end
+
+  test '#vertices returns an immutable list of vertices' do
+    vertices  = [1,2,3,4,5]
+    graph     = create_directed_graph vertices
+    result    = graph.vertices
+
+    assert_equal vertices, result
+
+    assert_raises FrozenError do
+      result << 6
+    end
   end
 
   test '#directed? returns true for directed graphs' do

@@ -17,6 +17,8 @@ module SimpleGraph
         end
 
         def each
+          return enum_for(:each) unless block_given?
+          
           visit(vertex_index) do |vi|
             yield graph[vi]
           end
