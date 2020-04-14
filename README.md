@@ -1,5 +1,7 @@
 # SimpleGraph
 
+[![Build Status](https://travis-ci.org/coroutine/simple_graph.svg?branch=master)](https://travis-ci.org/coroutine/simple_graph)
+
 Hi!  SimpleGraph is a Ruby gem who's name says it all: it is simple--in functionality
 and user experience--and it's a graph.  Imagine that!
 
