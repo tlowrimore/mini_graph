@@ -1,6 +1,6 @@
 # MiniGraph
 
-[![Build Status](https://travis-ci.org/coroutine/mini_graph.svg?branch=master)](https://travis-ci.org/coroutine/mini_graph)
+[![Build Status](https://travis-ci.org/coroutine/simple_graph.svg?branch=master)](https://travis-ci.org/coroutine/simple_graph)
 
 Hi!  MiniGraph is a Ruby gem who's name says it all: it is mini--in functionality
 and user experience--and it's a graph implementation.  Imagine that!
