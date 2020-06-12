@@ -1,12 +1,12 @@
-# SimpleGraph
+# MiniGraph
 
-[![Build Status](https://travis-ci.org/coroutine/simple_graph.svg?branch=master)](https://travis-ci.org/coroutine/simple_graph)
+[![Build Status](https://travis-ci.org/coroutine/mini_graph.svg?branch=master)](https://travis-ci.org/coroutine/mini_graph)
 
-Hi!  SimpleGraph is a Ruby gem who's name says it all: it is simple--in functionality
+Hi!  MiniGraph is a Ruby gem who's name says it all: it is mini--in functionality
 and user experience--and it's a graph implementation.  Imagine that!
 
-SimpleGraph provides a small DSL for defining and searching graphs.  Behind the scenes,
-SimpleGraph uses a core set of classes to support the DSL.  Of course, you are free
+MiniGraph provides a small DSL for defining and searching graphs.  Behind the scenes,
+MiniGraph uses a core set of classes to support the DSL.  Of course, you are free
 to directly use these classes for defining and searching graphs, if that better
 suits your taste.
 
@@ -15,7 +15,7 @@ suits your taste.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simple_graph'
+gem 'mini_graph'
 ```
 
 And then execute:
@@ -24,7 +24,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install simple_graph
+    $ gem install mini_graph
 
 ## Usage
 
@@ -49,7 +49,7 @@ jill  = { name: 'Jill', likes: %w(wind wrappers socks clay) }
 jane  = { name: 'Jane', likes: %w(cds parachutes corndogs living) }
 
 # Create a new undirected graph, with the 4 vertices: jim, john, jill, jane.
-friends = SimpleGraph.create(jim, john, jill, jane) do
+friends = MiniGraph.create(jim, john, jill, jane) do
 
   # create edges from jim, to john, jill and jane.
   edge from: jim,   to: [john, jill, jane]
@@ -72,20 +72,20 @@ We can also easily define edges from many vertices to many vertices.  Take, for
 example, this complete, undirected graph:
 
 ```ruby
-poker_friends = SimpleGraph.create(jim, john, jill, jane) do
+poker_friends = MiniGraph.create(jim, john, jill, jane) do
   edge from: [jim, john, jill, jane], to: [jim, john, jill, jane]
 end
 ```
 
 Dang! That was easy!  Ok, enough feigning astonishment!
 
-We've now seen undirected graphs, as defined using the SimpleGraph DSL, let's
+We've now seen undirected graphs, as defined using the MiniGraph DSL, let's
 now take a look at directed graphs.  Let's use our first example, but this time
 we'll make the edges directed.  Here we go!
 
 ```ruby
 # Create a new undirected graph, with the 4 vertices: jim, john, jill, jane.
-friends = SimpleGraph.create(jim, john, jill, jane) do
+friends = MiniGraph.create(jim, john, jill, jane) do
 
   # Make this a directed graph.
   directed!
@@ -113,12 +113,12 @@ Now, let's move on to searching.
 Now that we know how to define graphs, we should probably be able to find stuff
 in them, right?
 
-The SimpleGraph search DSL is pretty minimal.  You wanna do a depth-first search?
+The MiniGraph search DSL is pretty minimal.  You wanna do a depth-first search?
 Check it:
 
 ```ruby
 # Searching our previously defined friends graph, and starting our search at the 'john' vertex:
-results = SimpleGraph.dfs friends, start_at: john
+results = MiniGraph.dfs friends, start_at: john
 
 # results implements Enumerable
 results.entries # => [john, jim, jill, jane]
@@ -127,11 +127,11 @@ results.entries # => [john, jim, jill, jane]
 ...and here's breadth-first search on the same graph:
 
 ```ruby
-results = SimpleGraph.bfs friends, start_at: jill
+results = MiniGraph.bfs friends, start_at: jill
 results.entries # => [jill, jim, john, jane]
 ```
 
-That's it for the DSL!  Not much to it, right?  You might even call it _Simple_.
+That's it for the DSL!  Not much to it, right?  You might even call it _Mini_.
 
 ## Development
 
@@ -141,4 +141,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/coroutine/simple_graph.
+Bug reports and pull requests are welcome on GitHub at https://github.com/coroutine/mini_graph.

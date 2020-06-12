@@ -1,8 +1,8 @@
 require 'forwardable'
-require 'simple_graph/core/edge'
-require 'simple_graph/core/error'
+require 'mini_graph/core/edge'
+require 'mini_graph/core/error'
 
-module SimpleGraph
+module MiniGraph
   module Core
     class Graph
 
@@ -22,9 +22,9 @@ module SimpleGraph
 
       def edge_class
         if directed?
-          SimpleGraph::Core::Edge::Directed
+          MiniGraph::Core::Edge::Directed
         else
-          SimpleGraph::Core::Edge::Undirected
+          MiniGraph::Core::Edge::Undirected
         end
       end
 
@@ -35,13 +35,13 @@ module SimpleGraph
 
         # origin must reference a valid index within the graph
         if edge.origin >= size
-          raise ::SimpleGraph::Core::Error::InvalidIndexError,
+          raise ::MiniGraph::Core::Error::InvalidIndexError,
                 'origin_index invalid'
         end
 
         # destination must reference a valid index within the graph
         if edge.destination >= size
-          raise ::SimpleGraph::Core::Error::InvalidIndexError,
+          raise ::MiniGraph::Core::Error::InvalidIndexError,
                 'destination_index invalid'
         end
 
@@ -103,7 +103,7 @@ module SimpleGraph
         when 1
           args.first.tap do |edge|
             if edge.class != edge_class
-              raise SimpleGraph::Core::Error::InvalidEdgeTypeError,
+              raise MiniGraph::Core::Error::InvalidEdgeTypeError,
                     "edge must be instance of #{edge_class.name}"
             end
           end

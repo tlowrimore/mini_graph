@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "simple_graph/version"
+require "mini_graph/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "simple_graph"
-  spec.version       = SimpleGraph::VERSION
+  spec.name          = "mini_graph"
+  spec.version       = MiniGraph::VERSION
   spec.authors       = ["Tim Lowrimore"]
   spec.email         = ["tlowrimore@coroutine.com"]
 
-  spec.summary       = %q{A simple graph library + DSL}
-  spec.description   = %q{A simple graph library + DSL}
-  spec.homepage      = "https://github.com/coroutine/simple_graph"
+  spec.summary       = %q{A mini graph library + DSL}
+  spec.description   = %q{A mini graph library + DSL}
+  spec.homepage      = "https://github.com/coroutine/mini_graph"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.17"
+  spec.add_development_dependency "bundler", "~> 2.1"
   spec.add_development_dependency "rake", "~> 12.3.3"
   spec.add_development_dependency "minitest", "~> 5.0"
 end

@@ -1,20 +1,20 @@
-require 'simple_graph/core/error'
-require 'simple_graph/core/search'
+require 'mini_graph/core/error'
+require 'mini_graph/core/search'
 
-module SimpleGraph
+module MiniGraph
   module DSL
     class SearchContext
 
       ALGORITHM_IMPL = {
-        dfs: SimpleGraph::Core::Search::DFS,
-        bfs: SimpleGraph::Core::Search::BFS
+        dfs: MiniGraph::Core::Search::DFS,
+        bfs: MiniGraph::Core::Search::BFS
       }
 
       def self.evaluate(graph, start_at, algorithm:)
         algorithm_impl = ALGORITHM_IMPL[algorithm]
 
         unless algorithm_impl
-          raise SimpleGraph::Core::Error::InvalidSearchAlgorithmError,
+          raise MiniGraph::Core::Error::InvalidSearchAlgorithmError,
                 "An unknown algorithm was provided to SearchContext: #{algorithm}"
         end
 

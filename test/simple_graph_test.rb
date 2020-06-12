@@ -1,8 +1,8 @@
 require "test_helper"
 
-class SimpleGraphTest < Minitest::Test
+class MiniGraphTest < Minitest::Test
   test '.create creates a new graph' do
-    graph = SimpleGraph.create %w(A B C D) do
+    graph = MiniGraph.create %w(A B C D) do
       directed!
       edge from: 'A', to: ['B','C','D']
     end
@@ -11,24 +11,24 @@ class SimpleGraphTest < Minitest::Test
   end
 
   test '.dfs creates a new depth-first search' do
-    graph   = SimpleGraph.create %w(D E F) do
+    graph   = MiniGraph.create %w(D E F) do
       undirected!
       edge from: %w(D E F), to: %w(D E F)
     end
 
-    search  = SimpleGraph.dfs(graph, start_at: 'D')
+    search  = MiniGraph.dfs(graph, start_at: 'D')
 
-    assert_instance_of SimpleGraph::Core::Search::DFS, search
+    assert_instance_of MiniGraph::Core::Search::DFS, search
   end
 
   test '.bfs creates a new breadth-first search' do
-    graph   = SimpleGraph.create %w(D E F) do
+    graph   = MiniGraph.create %w(D E F) do
       directed!
       edge from: %w(D E F), to: %w(D E F)
     end
 
-    search  = SimpleGraph.bfs(graph, start_at: 'D')
-    
-    assert_instance_of SimpleGraph::Core::Search::BFS, search
+    search  = MiniGraph.bfs(graph, start_at: 'D')
+
+    assert_instance_of MiniGraph::Core::Search::BFS, search
   end
 end

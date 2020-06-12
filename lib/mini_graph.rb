@@ -1,8 +1,8 @@
-require "simple_graph/version"
-require "simple_graph/dsl/graph_context"
-require "simple_graph/dsl/search_context"
+require "mini_graph/version"
+require "mini_graph/dsl/graph_context"
+require "mini_graph/dsl/search_context"
 
-module SimpleGraph
+module MiniGraph
 
   # Used to construct a new graph.
   #
@@ -13,7 +13,7 @@ module SimpleGraph
   #   jill  = Person.new
   #   jane  = Person.new
   #
-  #   friends = SimpleGraph.create(jim, john, jill, jane) do
+  #   friends = MiniGraph.create(jim, john, jill, jane) do
   #     # Creates a directed graph
   #     directed!
   #
@@ -23,14 +23,14 @@ module SimpleGraph
   #   end
   #
   def self.create(*vertices, &block)
-    SimpleGraph::DSL::GraphContext.evaluate(*vertices, &block)
+    MiniGraph::DSL::GraphContext.evaluate(*vertices, &block)
   end
 
   def self.dfs(graph, start_at: nil)
-    SimpleGraph::DSL::SearchContext.evaluate(graph, start_at, algorithm: :dfs)
+    MiniGraph::DSL::SearchContext.evaluate(graph, start_at, algorithm: :dfs)
   end
 
   def self.bfs(graph, start_at: nil)
-    SimpleGraph::DSL::SearchContext.evaluate(graph, start_at, algorithm: :bfs)
+    MiniGraph::DSL::SearchContext.evaluate(graph, start_at, algorithm: :bfs)
   end
 end

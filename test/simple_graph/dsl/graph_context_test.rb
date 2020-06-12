@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class SimpleGraph::DSL::GraphContextTest < Minitest::Test
+class MiniGraph::DSL::GraphContextTest < Minitest::Test
   parallelize_me!
 
   def create_graph(*vertices, &block)
-    SimpleGraph::DSL::GraphContext.evaluate(*vertices, &block)
+    MiniGraph::DSL::GraphContext.evaluate(*vertices, &block)
   end
 
   test '.evaluate raises an error if no block is provided' do
@@ -47,7 +47,7 @@ class SimpleGraph::DSL::GraphContextTest < Minitest::Test
   end
 
   test '.evaluate raises an error when an invalid edge is specified' do
-    assert_raises SimpleGraph::Core::Error::InvalidEdgeError do
+    assert_raises MiniGraph::Core::Error::InvalidEdgeError do
       create_graph(%w(a b c)) do
         edge from: 'a', to: 'z'
       end

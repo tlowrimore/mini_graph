@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class SimpleGraph::Core::EdgeTest < Minitest::Test
+class MiniGraph::Core::EdgeTest < Minitest::Test
   parallelize_me!
 
   def create_directed_edge(origin, destination)
-    SimpleGraph::Core::Edge::Directed.new(origin, destination)
+    MiniGraph::Core::Edge::Directed.new(origin, destination)
   end
 
   def create_undirected_edge(origin, destination)
-    SimpleGraph::Core::Edge::Undirected.new(origin, destination)
+    MiniGraph::Core::Edge::Undirected.new(origin, destination)
   end
 
   test '#eql returns true when an edge points from the same origin to the same destination' do

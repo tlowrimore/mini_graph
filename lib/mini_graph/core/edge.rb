@@ -1,6 +1,6 @@
-require 'simple_graph/core/error'
+require 'mini_graph/core/error'
 
-module SimpleGraph
+module MiniGraph
   module Core
     module Edge
 

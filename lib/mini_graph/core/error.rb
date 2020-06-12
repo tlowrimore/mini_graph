@@ -1,4 +1,4 @@
-module SimpleGraph
+module MiniGraph
   module Core
     module Error
       class GraphError < StandardError; end
