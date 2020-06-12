@@ -6,12 +6,13 @@ require "simple_graph/version"
 Gem::Specification.new do |spec|
   spec.name          = "simple_graph"
   spec.version       = SimpleGraph::VERSION
-  spec.authors       = ["tlowrimore"]
+  spec.authors       = ["Tim Lowrimore"]
   spec.email         = ["tlowrimore@coroutine.com"]
 
   spec.summary       = %q{A simple graph library + DSL}
   spec.description   = %q{A simple graph library + DSL}
   spec.homepage      = "https://github.com/coroutine/simple_graph"
+  spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
