@@ -7,16 +7,17 @@ require "minitest/pride"
 Minitest::PrideIO.pride!
 
 # Macro for making test definitions easier to type and read.
-def test(description, &block)
-  unless block_given?
-    raise ArgumentError, "`test` requires a block."
+def test(name, &block)
+  test_name = "test_#{name.gsub(/\s+/, '_')}".to_sym
+  defined   = method_defined? test_name
+
+  raise "#{test_name} is already defined in #{self}" if defined
+  
+  if block_given?
+    define_method(test_name, &block)
+  else
+    define_method(test_name) do
+      flunk "No implementation provided for #{name}"
+    end
   end
-
-  method_name = description.to_s.downcase.gsub(/\W+/, '_')
-
-  if method_name.nil? || method_name.empty?
-    raise ArgumentError, "`#{description}` is an invalid test description"
-  end
-
-  define_method("test_#{method_name}", &block)
 end

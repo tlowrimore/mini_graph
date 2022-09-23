@@ -11,7 +11,7 @@ class MiniGraph::Core::EdgeTest < Minitest::Test
     MiniGraph::Core::Edge::Undirected.new(origin, destination)
   end
 
-  test '#eql returns true when an edge points from the same origin to the same destination' do
+  test '#eql returns true when a directed edge points from the same origin to the same destination' do
     edge_a  = create_directed_edge(0, 1)
     edge_b  = create_directed_edge(0, 1)
 
@@ -25,13 +25,13 @@ class MiniGraph::Core::EdgeTest < Minitest::Test
     refute_equal edge_a, edge_b
   end
 
-  test '#to_s returns a human-friendly string representing the edge' do
+  test '#to_s returns a human-friendly string representing the directed edge' do
     edge = create_directed_edge(1, 3)
 
     assert_equal "(1 -> 3)", edge.to_s
   end
 
-  test '#reverse returns a reversed copy of the edge' do
+  test '#reverse returns a reversed copy of the directed edge' do
     edge      = create_directed_edge(2, 4)
     reversed  = edge.reverse
     expected  = create_directed_edge(4, 2)
@@ -39,19 +39,19 @@ class MiniGraph::Core::EdgeTest < Minitest::Test
     assert_equal expected, reversed
   end
 
-  test '#self_loop? returns true if the edge points from a vertex X to vertex X' do
+  test '#self_loop? returns true if the directed edge points from a vertex X to vertex X' do
     edge  = create_directed_edge(1, 1)
 
     assert edge.self_loop?
   end
 
-  test '#self_loop returns false if the edge points from a vertex X to vertex Y' do
+  test '#self_loop? returns false if the directed edge points from a vertex X to vertex Y' do
     edge  = create_directed_edge(1, 3)
 
     refute edge.self_loop?
   end
 
-  test '#eql returns true when an edge points from the same origin to the same destination' do
+  test '#eql returns true when an undirected edge points from the same origin to the same destination' do
     edge_a  = create_undirected_edge(0, 1)
     edge_b  = create_undirected_edge(0, 1)
 
@@ -65,13 +65,13 @@ class MiniGraph::Core::EdgeTest < Minitest::Test
     assert_equal edge_a, edge_b
   end
 
-  test '#to_s returns a human-friendly string representing the edge' do
+  test '#to_s returns a human-friendly string representing the undirected edge' do
     edge = create_undirected_edge(1, 3)
 
     assert_equal "(1 <-> 3)", edge.to_s
   end
 
-  test '#reverse returns a reversed copy of the edge' do
+  test '#reverse returns a reversed copy of the undirected edge' do
     edge      = create_undirected_edge(2, 4)
     reversed  = edge.reverse
     expected  = create_undirected_edge(4, 2)
@@ -79,13 +79,13 @@ class MiniGraph::Core::EdgeTest < Minitest::Test
     assert_equal expected, reversed
   end
 
-  test '#self_loop? returns true if the edge points from a vertex X to vertex X' do
+  test '#self_loop? returns true if the undirected edge points from a vertex X to vertex X' do
     edge  = create_undirected_edge(1, 1)
 
     assert edge.self_loop?
   end
 
-  test '#self_loop returns false if the edge points from a vertex X to vertex Y' do
+  test '#self_loop? returns false if the undirected edge points from a vertex X to vertex Y' do
     edge  = create_undirected_edge(1, 3)
 
     refute edge.self_loop?
